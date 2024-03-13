@@ -1,5 +1,0 @@
-host: localhost
-database: ReactNative
-user: swen732
-password: admin
-port: 5432
