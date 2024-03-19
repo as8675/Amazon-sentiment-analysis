@@ -142,13 +142,13 @@ data "aws_iam_policy_document" "s3_policy" {
 data "aws_iam_policy_document" "logs_policy" {
   statement {
     effect    = "Allow"
-    resources = ["arn:aws:logs:us-east-1:851725641731:*"]
+    resources = ["arn:aws:logs:us-east-1:*"]
     actions   = ["logs:CreateLogGroup"]
   }
 
   statement {
     effect    = "Allow"
-    resources = ["arn:aws:logs:us-east-1:851725641731:*"]
+    resources = ["arn:aws:logs:us-east-1:*"]
 
     actions = [
       "logs:CreateLogStream",
