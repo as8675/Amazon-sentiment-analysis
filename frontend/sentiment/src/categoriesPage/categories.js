@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-
 const CategoriesPage = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:5000/categories');
+                const response = await fetch(`http://${process.env.REACT_APP_AWS_EC2_EIP}:5000/categories`);
                 const data = await response.json();
                 setCategories(data); 
             } catch (error) {
@@ -17,16 +16,6 @@ const CategoriesPage = () => {
 
         fetchCategories();
     }, []);
-
-    const checkImageExists = async (url) => {
-        try {
-            const response = await fetch(url);
-            return response.ok;
-        } catch (error) {
-            console.error('Error checking image existence:', error);
-            return false;
-        }
-    };
 
     return (
         <div>

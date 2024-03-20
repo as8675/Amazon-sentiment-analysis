@@ -33,3 +33,27 @@ img {
   margin-right: 75px;
   cursor: pointer;
 }
+
+.inputBox {
+  width: 300px; /* Adjust the width as needed */
+  text-align: center; /* Center align the content */
+  padding: 8px;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Add border radius */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  margin-bottom: 15px;
+}
+
+.canvasContainer {
+  width: 80%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center align the container */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Add border radius */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.479); /* Add box shadow */
+}
+
+.canvasContainer canvas {
+  width: 100%; /* Make the canvas fill its container */
+  height: auto; /* Auto-adjust height */
+}
+

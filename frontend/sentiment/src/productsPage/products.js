@@ -9,7 +9,7 @@ const ProductsPage = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/products/${categoryId}`);
+                const response = await fetch(`http://${process.env.REACT_APP_AWS_EC2_EIP}:5000/products/${categoryId}`);
                 const data = await response.json();
                 setProducts(data); 
             } catch (error) {
