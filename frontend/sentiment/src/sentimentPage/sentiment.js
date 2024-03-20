@@ -2,25 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import BarChart from '../graphPage/graph';
+import loader from '../loadingPage/loader.gif'; // Import the loader GIF
 
 const SentimentsPage = () => {
     const { productId } = useParams();
     const [sentiments, setSentiment] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // State to control loading state
 
     useEffect(() => {
         const fetchSentiments = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/sentiments/${productId}`);
+                const response = await fetch(`http://${process.env.REACT_APP_AWS_EC2_EIP}:5000/sentiments/${productId}`);
                 const data = await response.json();
-                console.log(data);
                 const sortedSentiments = data.sort((a, b) => {
                     return new Date(a.reviewDate) - new Date(b.reviewDate);
                 });
                 const groupSentiment = groupSentimentByDate(sortedSentiments);
                 const formatedData = sentimentCalculator(groupSentiment);
                 setSentiment(formatedData); 
+                setIsLoading(false); // Set loading state to false after fetching data
             } catch (error) {
-                console.error('Error fetching sentimnets:', error);
+                console.error('Error fetching sentiments:', error);
+                setIsLoading(false); // Set loading state to false in case of error
             }
         };
 
@@ -87,7 +90,15 @@ const SentimentsPage = () => {
     return (
         <div>
             <h1> Sentiment </h1>
-            <BarChart data={sentiments} />
+
+            {isLoading ? (
+                <img src={loader} alt="Loading..." /> // Display loader GIF while loading
+            ) : (
+                <>
+                    <BarChart data={sentiments} />
+                </>
+            )}
+             
         </div>
         
     );
