@@ -1,16 +1,10 @@
 # Terraform Script for Data Processing Flow
 
 ## What will this script do?
-- Create S3 Bucket (e.g. `acr-sentiment-bucket-team-7>`)
-- Create Lambda Function (`acr-lambda-function-team-7`)
-- Create Dynamo DB Tables
-    - `categories`
-    - `products`
-    - `reviews`
-    - `subscriptions`
-
-## How Data Processing Flow will work?
-- When CSV Files containing data will be uploaded to S3 Bucket (`acr-sentiment-bucket-team-7`) Lambda Function will be triggered which will insert data to the DynamoDB Tables
+- Clone the Latest Changes from Git 'main' branch.
+- Install all the required dependencies.
+- Assign Elastic IP Address to EC2 Instance and Start the Flask App.
+- Elastic IP will then be leveraged in Frontend Application.
 
 # Steps to Run Terraform Script
 
@@ -40,10 +34,16 @@
     - Click on Your Account Name -> Security credentials -> Access keys -> Create access key 
 
 ## Step 3: Upload Terraform Script in S3 Bucket and download in Running EC2
-- Make Necessary Changes in `variable.tf` File in `dataprocessing` Folder.
-    - You will need to provide unique S3 Bucket Name
+- Make Necessary Changes in `variable.tf` File in `application` Folder.
+    - You will need to provide:
+        - Your Key Value Pair
+        - GitHub Repository Admin's Username
+        - GitHub Repository Admin's PAT
+        - Desired AWS Region
+        - Your AWS Root Access Key
+        - Your AWS Root Secret Access Key
 
-- Create S3 Bucket and Upload Terraform Script and lambda.py File from `dataprocessing` Folder
+- Create S3 Bucket and Upload Terraform Script and lambda.py File from `application` Folder
 
 - Check if AWS CLI is configured correctly by using following command:
     - `aws s3 ls`
@@ -62,16 +62,10 @@
 - Apply Terraform using following CommandL
     - `terraform apply` and then type 'yes'
 
-- All of the Required Services will Spin-Up.
+- Flask Application will Start
 
-## Step 5: Upload Dataset Files
+- Use `http://{Elasti IP}:5000` to access the API Endpoints
 
-- Upload the datasets One by One. 
-- You can check if Data is being inserted into DynamoDB in CloudWatch.
-- Once all Files are uploaded check in DynamoDB if all tables are populated or not.
-
-## Step 6: Destroy Terraform
-- You will have to go through all of the process once again if you perform below step.
-
-- Use following command if you want to delete all the resources used for Data Processing.
+## Step 5: Destroy Terraform
+- Use following command if you want stop the Application and Delete all resources.
     - `terraform destroy` and then type 'yes'
