@@ -1,20 +1,39 @@
-import { Authenticator } from "@aws-amplify/ui-react";
+import { Authenticator, Heading } from "@aws-amplify/ui-react";
 import '@aws-amplify/ui-react/styles.css';
-import CategoriesPage from "../categoriesPage/categories";
+// import CategoriesPage from "../categoriesPage/categories";
+import '../App.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
+    const nav = useNavigate();
+
     return(
+        
+        <div className="login-page">
+
+        <Heading level={1} className="heading">
+            Amazon Product Sentiment Analysis
+        </Heading>
+        <Heading level={3} className="sub-heading">
+                Hey, good to see you!
+            </Heading>
+
+        <p className="welcome-text">Log in to get going.</p>
+        
         <Authenticator>
-            {({ signOut, user }) => (
-               
-               <div>
-                    <h1> Sentiment Analysis </h1>
-                    <CategoriesPage></CategoriesPage>
-                    <button onClick={signOut}>Sign Out</button>
-                </div>
-            )}
+            {({ signOut, user }) => {
+
+                if (user) {
+                    nav('/categories');
+                    {user && <button onClick={signOut}>Sign Out</button>}
+                }
+        
+            }}
             
         </Authenticator>
+        
+       </div>
     );
 };
 
