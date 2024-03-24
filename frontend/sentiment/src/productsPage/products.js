@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Sidebar from '../Sidebar/Sidebar';
 
 const ProductsPage = () => {
     const { categoryId } = useParams();
@@ -22,6 +23,7 @@ const ProductsPage = () => {
 
     return (
         <div>
+             <Sidebar></Sidebar>
             <h1> Products </h1>
             <ul>
                 {products.map(product => (

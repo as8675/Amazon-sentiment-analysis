@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Sidebar from '../Sidebar/Sidebar';
 
 const CategoriesPage = () => {
     const [categories, setCategories] = useState([]);
@@ -19,6 +20,7 @@ const CategoriesPage = () => {
 
     return (
         <div>
+            <Sidebar></Sidebar>
             <h1> Categories </h1>
             <div className="categories-container">
                 {categories.map(category => (
