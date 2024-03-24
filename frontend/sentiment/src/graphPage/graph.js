@@ -4,6 +4,7 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // Import the styles for DateRange component
 import 'react-date-range/dist/theme/default.css'; // Import the default theme for DateRange component
 import CloseIcon from '@mui/icons-material/Close';
+import Sidebar from '../Sidebar/Sidebar';
 
 const BarChart = ({ data }) => {
     const chartRef = useRef(null);
@@ -131,6 +132,7 @@ const BarChart = ({ data }) => {
         setChart(newChart);
 
         return () => {
+            <Sidebar></Sidebar>
             newChart.destroy();
         };
     }, [data, dateRange]);

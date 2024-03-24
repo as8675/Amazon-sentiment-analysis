@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import BarChart from '../graphPage/graph';
 import loader from '../loadingPage/loader.gif'; // Import the loader GIF
+import Sidebar from '../Sidebar/Sidebar';
 
 const SentimentsPage = () => {
     const { productId } = useParams();
@@ -89,6 +90,7 @@ const SentimentsPage = () => {
 
     return (
         <div>
+            <Sidebar></Sidebar>
             <h1> Sentiment </h1>
 
             {isLoading ? (
