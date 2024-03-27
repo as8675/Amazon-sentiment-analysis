@@ -34,6 +34,7 @@ const ProductsPage = () => {
 
     return (
         <div>
+            <Sidebar></Sidebar>
             <h1>Products</h1>
             <ul>
                 {products.map(product => {
