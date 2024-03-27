@@ -18,6 +18,15 @@ const CategoriesPage = () => {
         fetchCategories();
     }, []);
 
+    const getImageSource = (categoryName) => {
+        try {
+            return require(`../images/${categoryName}.jpeg`);
+        } catch (error) {
+            console.error(`Error loading image for category '${categoryName}':`, error);
+            return require('../images/Image Not Found.jpeg');
+        }
+    };
+
     return (
         <div>
             <Sidebar></Sidebar>
@@ -29,8 +38,8 @@ const CategoriesPage = () => {
                         <div onClick={() => window.location.href=`/products/${category.categoryId}`}>
                             {/* Link to the ProductsPage with categoryId as a parameter */}
                             <p onClick = {() => window.location.href=`/products/${category.categoryId}`}>
-                                <img src={require(`../images/${category.categoryName}.jpeg`)} alt={category.categoryName}/>
-                                <p>{category.categoryName}</p>
+                            <img src={getImageSource(category.categoryName)} alt={category.categoryName}/>
+                            <p>{category.categoryName}</p>
                             </p>
                         </div>
                     </div>
