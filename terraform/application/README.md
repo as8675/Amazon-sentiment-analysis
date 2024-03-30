@@ -1,4 +1,4 @@
-# Terraform Script for Data Processing Flow
+# Terraform Script to Start Application
 
 ## What will this script do?
 - Clone the Latest Changes from Git 'main' branch.

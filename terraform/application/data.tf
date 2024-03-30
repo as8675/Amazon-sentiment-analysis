@@ -19,3 +19,17 @@ data "aws_ami" "amazonlinux" {
         values = ["x86_64"]
     }
 }
+
+# Assume Role [Trusted Entity]
+data "aws_iam_policy_document" "amplify_assume_role" {
+    statement {
+        effect = "Allow"
+
+        principals {
+            type        = "Service"
+            identifiers = ["amplify.amazonaws.com"]
+        }
+
+        actions = ["sts:AssumeRole"]
+    }
+}
