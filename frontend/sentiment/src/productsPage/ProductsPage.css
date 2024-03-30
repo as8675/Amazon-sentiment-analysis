@@ -1,0 +1,19 @@
+.product-item {
+    margin-bottom: 20px; /* Add margin between product items */
+}
+
+.product-container {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Align items vertically in the center */
+}
+
+.product-image {
+    width: 100px; /* Set width of the image */
+    height: 100px; /* Set height of the image to make it square */
+    margin-right: 20px; /* Add margin to the right of the image */
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.product-name {
+    margin: 0; /* Remove default margin */
+}
