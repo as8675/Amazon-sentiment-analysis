@@ -2,7 +2,7 @@
 variable "s3_bucket" {
     type = string
     description = "S3 Bucket Name"
-    default = "acr-sentiment-bucket-team-7" # Update this Value to be Unique e.g 'acr-sentiment-bucket-team-7-<Your Name>'
+    default = "acr-sentiment-bucket-team-7-project" # Update this Value to be Unique e.g 'acr-sentiment-bucket-team-7-<Your Name>'
 }
 
 # Lambda Function
