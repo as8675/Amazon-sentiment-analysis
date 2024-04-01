@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 const CategoriesPage = () => {
     const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const response = await fetch(`http://${process.env.REACT_APP_AWS_EC2_EIP}:5000/categories`);
                 const data = await response.json();
-                setCategories(data); 
+                setCategories(data);
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }
@@ -30,20 +32,24 @@ const CategoriesPage = () => {
     return (
         <div>
             <Sidebar></Sidebar>
-            <h1> Categories </h1>
-            <div className="categories-container">
-                {categories.map(category => (
-                    <div key={category.categoryId} className="category-item">
-                        {/* Clickable container */}
-                        <div onClick={() => window.location.href=`/products/${category.categoryId}`}>
-                            {/* Link to the ProductsPage with categoryId as a parameter */}
-                            <p onClick = {() => window.location.href=`/products/${category.categoryId}`}>
-                            <img src={getImageSource(category.categoryName)} alt={category.categoryName}/>
-                            <p>{category.categoryName}</p>
-                            </p>
+            <div className='cardmargin'>
+                <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-black md:text-5xl lg:text-6xl">
+                    Categories
+                </h1>
+                <div className="category-container flex flex-wrap justify-center">
+                    {categories.map(category => (
+                        <div key={category.categoryId} className="cards cardspace hover:cursor-pointer max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:bg-black dark:bg-gray-800 dark:border-gray-700 mb-8">
+                            <div className="max-w-80 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                <a onClick={() => { navigate(`/products/${category.categoryId}`, {state:{categoryName:category.categoryName}})}}>
+                                    <img className="img_cat rounded-t-lg" src={getImageSource(category.categoryName)} alt={category.categoryName} />
+                                    <div className="p-3">
+                                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{category.categoryName}</h5>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
