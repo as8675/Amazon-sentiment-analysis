@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
-import './ProductsPage.css'; // Import CSS file for styling
 import { useLocation } from 'react-router-dom';
 
 
