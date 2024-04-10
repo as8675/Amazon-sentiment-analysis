@@ -23,6 +23,7 @@ const LoginPage = () => {
             <Authenticator>
                 {({ signOut, user }) => {
                     if (user) {
+                        localStorage.setItem('userId', user.signInDetails.loginId)
                         nav('/categories', { user });
 
                         { user && <button onClick={signOut}>Sign Out</button> }
