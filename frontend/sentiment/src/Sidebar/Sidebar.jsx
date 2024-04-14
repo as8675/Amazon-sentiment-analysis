@@ -12,6 +12,7 @@ function Sidebar() {
   const handleLogout = async () => {
     try {
       await signOut();
+      localStorage.setItem("userId", "");
       nav('/'); // Redirect to login page after logout
     } catch (error) {
       console.error('Error signing out: ', error);
@@ -32,6 +33,9 @@ function Sidebar() {
           </li>
           <li>
             <a onClick={() => handleClick('/categories')} className="hover:cursor-pointer block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
+          </li>
+          <li>
+            <a onClick={() => handleClick('/subscriptions')} className="hover:cursor-pointer block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Subscriptions</a>
           </li>
         </ul>
 
