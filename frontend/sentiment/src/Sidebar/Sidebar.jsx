@@ -12,6 +12,7 @@ function Sidebar() {
   const handleLogout = async () => {
     try {
       await signOut();
+      localStorage.setItem("userId", "");
       nav('/'); // Redirect to login page after logout
     } catch (error) {
       console.error('Error signing out: ', error);
