@@ -115,7 +115,7 @@ const ProductsPage = (props) => {
           </h1>
         </div>
         <div className="max-w-4xl mx-auto relative">
-          {!isLoading && (
+          {!isLoading ? (
             <ul>
               {products.map((product) => (
                 <li key={product.productId} className="relative">
@@ -160,6 +160,8 @@ const ProductsPage = (props) => {
                 </li>
               ))}
             </ul>
+          ) : (
+            <p>Loading...</p>
           )}
         </div>
       </div>
