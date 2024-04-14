@@ -73,7 +73,9 @@
 
 - Flask Application will Start
 
-- Use `http://{Elasti IP}:5000` to access the API Endpoints
+- Go to AWS Amplify Console and click 'Run Build'
+
+- Once the Build is complete you can access the application using the Domain link
 
 ## Step 5: Destroy Terraform
 - Use following command if you want stop the Application and Delete all resources.
