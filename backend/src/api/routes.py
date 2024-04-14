@@ -172,6 +172,31 @@ def subscribe():
         print('Unable to Subscribe to a Product!')
         print(e)
         return 'Unable to Subscribe to a Product!'
+    
+@app.route('/unsubscribe', methods=['POST'])
+def unsubscribe():
+    try:
+        params = request.args
+
+        if 'userId' not in params or 'productId' not in params:
+            return 'userId or productId not present!'
+            
+        subscriptionId = generate_hash(params.get('userId') + params.get('productId'))
+        
+        if item_exists('subscriptions', 'subscriptionId', subscriptionId):
+            response = dynamodb.delete_item(
+                TableName='subscriptions',
+                Key={
+                    'subscriptionId': {'S': subscriptionId}
+                }
+            )
+            return 'Unsubscription Successful!'
+        else:
+            return 'Subscription Not Found!'
+    except Exception as e:
+        print('Unable to Unsubscribe from a Product!')
+        print(e)
+        return 'Unable to Unsubscribe from a Product!'
 
 @app.route('/productname/<productId>', methods=['GET'])
 def get_product_name(productId):

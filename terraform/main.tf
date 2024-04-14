@@ -257,18 +257,18 @@ resource "aws_iam_role_policy_attachment" "amplify_policy" {
     role = aws_iam_role.iam_for_amplify.name
 }
 
-# To host forntned on AWS Amplify App
+# To host frontned on AWS Amplify App
 resource "aws_amplify_app" "sentiment_app" {
     name = "sentiment-app"
     repository = "https://github.com/comkar893/SWEN614-Team7.git"
 
 
-    #github access token
+    # GitHub PAT
     access_token = var.github_pat
 
     iam_service_role_arn = aws_iam_role.iam_for_amplify.arn
 
-    # The default build_spec added by the Amplify Console for React.
+    # The build_spec added by the Amplify Console for React.
     build_spec = <<-EOT
         version: 1
         applications:
