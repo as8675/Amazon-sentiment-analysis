@@ -1,18 +1,21 @@
 # Terraform Script to Start Application
 
 ## What will this script do?
-- Create S3 Bucket (e.g. `acr-sentiment-bucket-team-7>`)
+- Create S3 Bucket (e.g. `acr-sentiment-bucket-team-7`)
 - Create Lambda Function (`acr-lambda-function-team-7`)
 - Create Dynamo DB Tables
     - `categories`
     - `products`
     - `reviews`
     - `subscriptions`
-- Clone the Latest Changes from Git 'main' branch in EC2.
-- Install all the required dependencies.
-- Assign Elastic IP Address to EC2 Instance and Start the Flask App.
-- Elastic IP will then be leveraged in Frontend Application.
-- Deploy frontend App on AWS Amplify
+- Log the data processing results in CloudWatch.
+- Create an EC2 instance
+    - Clone the Latest Changes from Git 'main' branch in EC2.
+    - Install all the required dependencies.
+    - Assign Elastic IP Address to EC2 Instance and Start the Flask App.
+- Create a frontend App on AWS Amplify and use Elastic IP to hit backend Endpoints.
+- Use Amazon Cognito for user authentication.
+- Use Amazon Comprehend to get sentiments.
 
 # Steps to Run Terraform Script
 
@@ -52,13 +55,20 @@
         - Your AWS Root Secret Access Key
         - You will need to provide unique S3 Bucket Name
 
-- Create S3 Bucket and Upload Terraform Script and lambda.py File.
+- Create S3 Bucket (Name it as per your choice) and Upload Terraform Script and lambda.py File.
+    - This bucket will be used to download all the required files to spin up all the required services.
+    - You will need to upload following files:
+        - `variable.tf`
+        - `data.tf`
+        - `main.tf`
+        - `output.tf`
+        - `lambda.py`
 
 - Check if AWS CLI is configured correctly by using following command:
     - `aws s3 ls`
 
 - Download Terraform Script in the EC2 using following commands:
-    - `aws s3 cp s3://[Your S3 Bucket Name] . --recursive`
+    - `aws s3 cp s3://[S3 Bucket Name which has TF Files] . --recursive`
 
 ## Step 4: Run Terraform
 
@@ -71,12 +81,17 @@
 - Apply Terraform using following CommandL
     - `terraform apply` and then type 'yes'
 
-- Flask Application will Start
+## Step 5: Upload Data and Setup Amplify
 
-- Go to AWS Amplify Console and click 'Run Build'
+- Upload the provided dataset files to `acr-sentiment-bucket-team-7-*` 
+- Check if `categories`,  `products`, `reviews` tables in DynamoDB are populated or not.
+- Go to Amplify and 'Run Build' (It usually takes 3-4 minutes to complete.)
+- Open the Amplify Link once code is deployed.
+- You will need to **Allow Insecure Content** to access the API Endpoints (As we are accessing HTTP endpoints from website hosted using HTTPS).
+    - Click on **View site information** near the left side of the link.
+    - Go to **Site settings** and Allow Insecure Content.
+- Reload the page once and you can start using the Application.
 
-- Once the Build is complete you can access the application using the Domain link
-
-## Step 5: Destroy Terraform
+## Step 6: Destroy Terraform
 - Use following command if you want stop the Application and Delete all resources.
     - `terraform destroy` and then type 'yes'
