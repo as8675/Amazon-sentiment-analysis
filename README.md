@@ -1,5 +1,4 @@
-# SWEN614-Team7
-SWEN614 Project (Team 7)
+# Amazon Sentiment Analysis
 
 ## To start the `Sentiment Analysis Application` run the Backend Application first and then the Frontend Application
 
